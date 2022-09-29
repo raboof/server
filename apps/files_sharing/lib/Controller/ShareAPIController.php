@@ -366,10 +366,11 @@ class ShareAPIController extends OCSController {
 	 * @NoAdminRequired
 	 *
 	 * @param string $id
+	 * @param bool $includeTags
 	 * @return DataResponse
 	 * @throws OCSNotFoundException
 	 */
-	public function getShare(string $id): DataResponse {
+	public function getShare(string $id, bool $includeTags = false): DataResponse {
 		try {
 			$share = $this->getShareById($id);
 		} catch (ShareNotFound $e) {
@@ -379,10 +380,17 @@ class ShareAPIController extends OCSController {
 		try {
 			if ($this->canAccessShare($share)) {
 				$share = $this->formatShare($share);
-				return new DataResponse([$share]);
+
+				if ($includeTags) {
+					$share = Helper::populateTags([$share], 'file_source', \OC::$server->getTagManager());
+				} else {
+					$share = [$share];
+				}
+
+				return new DataResponse($share);
 			}
 		} catch (NotFoundException $e) {
-			// Fall trough
+			// Fall through
 		}
 
 		throw new OCSNotFoundException($this->l->t('Wrong share ID, share does not exist'));
@@ -1187,7 +1195,9 @@ class ShareAPIController extends OCSController {
 				}
 
 				// normalize to correct public upload permissions
-				$newPermissions = Constants::PERMISSION_READ | Constants::PERMISSION_CREATE | Constants::PERMISSION_UPDATE | Constants::PERMISSION_DELETE;
+				if ($publicUpload === 'true') {
+					$newPermissions = Constants::PERMISSION_READ | Constants::PERMISSION_CREATE | Constants::PERMISSION_UPDATE | Constants::PERMISSION_DELETE;
+				}
 			}
 
 			if ($newPermissions !== null) {
@@ -1219,7 +1229,7 @@ class ShareAPIController extends OCSController {
 
 			if ($label !== null) {
 				if (strlen($label) > 255) {
-					throw new OCSBadRequestException("Maxmimum label length is 255");
+					throw new OCSBadRequestException("Maximum label length is 255");
 				}
 				$share->setLabel($label);
 			}

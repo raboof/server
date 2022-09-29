@@ -24,15 +24,21 @@ declare(strict_types=1);
  */
 namespace OCA\Theming\Themes;
 
+use OCA\Theming\AppInfo\Application;
 use OCA\Theming\ImageManager;
+use OCA\Theming\ITheme;
 use OCA\Theming\ThemingDefaults;
 use OCA\Theming\Util;
-use OCA\Theming\ITheme;
+use OCP\App\IAppManager;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IURLGenerator;
+use OCP\IUserSession;
+use OCP\Server;
 
 class DefaultTheme implements ITheme {
+	use CommonThemeTrait;
+
 	public Util $util;
 	public ThemingDefaults $themingDefaults;
 	public IURLGenerator $urlGenerator;
@@ -84,17 +90,14 @@ class DefaultTheme implements ITheme {
 
 	public function getCSSVariables(): array {
 		$colorMainText = '#222222';
+		$colorMainTextRgb = join(',', $this->util->hexToRGB($colorMainText));
 		$colorMainBackground = '#ffffff';
 		$colorMainBackgroundRGB = join(',', $this->util->hexToRGB($colorMainBackground));
 		$colorBoxShadow = $this->util->darken($colorMainBackground, 70);
 		$colorBoxShadowRGB = join(',', $this->util->hexToRGB($colorBoxShadow));
-		$colorPrimaryLight = $this->util->mix($this->primaryColor, $colorMainBackground, -80);
 
-		$colorPrimaryElement = $this->util->elementColor($this->primaryColor);
-		$colorPrimaryElementLight = $this->util->mix($colorPrimaryElement, $colorMainBackground, -80);
-
-		$hasCustomLogoHeader = $this->imageManager->hasImage('logo') ||  $this->imageManager->hasImage('logoheader');
-		$hasCustomPrimaryColour = !empty($this->config->getAppValue('theming', 'color'));
+		$hasCustomLogoHeader = $this->imageManager->hasImage('logo') || $this->imageManager->hasImage('logoheader');
+		$hasCustomPrimaryColour = !empty($this->config->getAppValue(Application::APP_ID, 'color'));
 
 		$variables = [
 			'--color-main-background' => $colorMainBackground,
@@ -114,30 +117,13 @@ class DefaultTheme implements ITheme {
 			'--color-placeholder-light' => $this->util->darken($colorMainBackground, 10),
 			'--color-placeholder-dark' => $this->util->darken($colorMainBackground, 20),
 
-			// primary related colours
-			'--color-primary' => $this->primaryColor,
-			'--color-primary-text' => $this->util->invertTextColor($this->primaryColor) ? '#000000' : '#ffffff',
-			'--color-primary-hover' => $this->util->mix($this->primaryColor, $colorMainBackground, 60),
-			'--color-primary-light' => $colorPrimaryLight,
-			'--color-primary-light-text' => $this->primaryColor,
-			'--color-primary-light-hover' => $this->util->mix($colorPrimaryLight, $colorMainText, 90),
-			'--color-primary-text-dark' => $this->util->darken($this->util->invertTextColor($this->primaryColor) ? '#000000' : '#ffffff', 7),
-			// used for buttons, inputs...
-			'--color-primary-element' => $colorPrimaryElement,
-			'--color-primary-element-text' => $this->util->invertTextColor($colorPrimaryElement) ? '#000000' : '#ffffff',
-			'--color-primary-element-hover' => $this->util->mix($colorPrimaryElement, $colorMainBackground, 60),
-			'--color-primary-element-light' => $colorPrimaryElementLight,
-			'--color-primary-element-light-text' => $colorPrimaryElement,
-			'--color-primary-element-light-hover' => $this->util->mix($colorPrimaryElementLight, $colorMainText, 90),
-			'--color-primary-element-text-dark' => $this->util->darken($this->util->invertTextColor($colorPrimaryElement) ? '#000000' : '#ffffff', 7),
-			// to use like this: background-image: var(--gradient-primary-background);
-			'--gradient-primary-background' => 'linear-gradient(40deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)',
-
 			// max contrast for WCAG compliance
 			'--color-main-text' => $colorMainText,
 			'--color-text-maxcontrast' => $this->util->lighten($colorMainText, 33),
 			'--color-text-light' => $colorMainText,
 			'--color-text-lighter' => $this->util->lighten($colorMainText, 33),
+
+			'--color-scrollbar' => 'rgba(' . $colorMainTextRgb . ', .15)',
 
 			// info/warning/success feedback colours
 			'--color-error' => '#e9322d',
@@ -173,7 +159,9 @@ class DefaultTheme implements ITheme {
 			// pill-style button, value is large so big buttons also have correct roundness
 			'--border-radius-pill' => '100px',
 
+			'--default-clickable-area' => '44px',
 			'--default-line-height' => '24px',
+			'--default-grid-baseline' => '4px',
 
 			// various structure data
 			'--header-height' => '50px',
@@ -202,7 +190,10 @@ class DefaultTheme implements ITheme {
 			'--image-main-background' => "url('" . $this->urlGenerator->imagePath('core', 'app-background.jpg') . "')",
 		];
 
-		$backgroundDeleted = $this->config->getAppValue('theming', 'backgroundMime', '') === 'backgroundColor';
+		// Primary variables
+		$variables = array_merge($variables, $this->generatePrimaryVariables($colorMainBackground, $colorMainText));
+
+		$backgroundDeleted = $this->config->getAppValue(Application::APP_ID, 'backgroundMime', '') === 'backgroundColor';
 		// If primary as background has been request or if we have a custom primary colour
 		// let's not define the background image
 		if ($backgroundDeleted || $hasCustomPrimaryColour) {
@@ -210,7 +201,7 @@ class DefaultTheme implements ITheme {
 		}
 
 		// Register image variables only if custom-defined
-		foreach(['logo', 'logoheader', 'favicon', 'background'] as $image) {
+		foreach (['logo', 'logoheader', 'favicon', 'background'] as $image) {
 			if ($this->imageManager->hasImage($image)) {
 				$imageUrl = $this->imageManager->getImageUrl($image);
 				if ($image === 'background') {
@@ -227,6 +218,25 @@ class DefaultTheme implements ITheme {
 
 		if ($hasCustomLogoHeader) {
 			$variables["--image-logoheader-custom"] = 'true';
+		}
+
+		$appManager = Server::get(IAppManager::class);
+		$userSession = Server::get(IUserSession::class);
+		$user = $userSession->getUser();
+		if ($appManager->isEnabledForUser(Application::APP_ID) && $user !== null) {
+			$themingBackground = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'background', 'default');
+
+			if ($themingBackground === 'custom') {
+				// Custom
+				$variables['--image-main-background'] = "url('" . $this->urlGenerator->linkToRouteAbsolute('theming.userTheme.getBackground') . "')";
+			} elseif ($themingBackground !== 'default' && substr($themingBackground, 0, 1) !== '#') {
+				// Shipped background
+				$variables['--image-main-background'] = "url('" . $this->urlGenerator->linkTo(Application::APP_ID, "/img/background/$themingBackground") . "')";
+			} elseif (substr($themingBackground, 0, 1) === '#') {
+				// Color
+				unset($variables['--image-main-background']);
+				$variables['--color-main-background-plain'] = $this->primaryColor;
+			}
 		}
 
 		return $variables;

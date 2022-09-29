@@ -51,7 +51,6 @@ namespace OC;
 use bantu\IniGetWrapper\IniGetWrapper;
 use Exception;
 use InvalidArgumentException;
-use OC\App\AppStore\Bundles\BundleFetcher;
 use OC\Authentication\Token\PublicKeyTokenProvider;
 use OC\Authentication\Token\TokenCleanupJob;
 use OC\Log\Rotate;
@@ -403,14 +402,6 @@ class Setup {
 
 			// Install shipped apps and specified app bundles
 			Installer::installShippedApps();
-			$bundleFetcher = new BundleFetcher(\OC::$server->getL10N('lib'));
-			$defaultInstallationBundles = $bundleFetcher->getDefaultInstallationBundle();
-			foreach ($defaultInstallationBundles as $bundle) {
-				try {
-					$this->installer->installAppBundle($bundle);
-				} catch (Exception $e) {
-				}
-			}
 
 			// create empty file in data dir, so we can later find
 			// out that this is indeed an ownCloud data directory

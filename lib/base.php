@@ -760,6 +760,7 @@ class OC {
 		self::registerEncryptionWrapperAndHooks();
 		self::registerAccountHooks();
 		self::registerResourceCollectionHooks();
+		self::registerFileReferenceEventListener();
 		self::registerAppRestrictionsHooks();
 
 		// Make sure that the application class is not loaded before the database is setup
@@ -920,6 +921,10 @@ class OC {
 
 	private static function registerResourceCollectionHooks() {
 		\OC\Collaboration\Resources\Listener::register(Server::get(SymfonyAdapter::class), Server::get(IEventDispatcher::class));
+	}
+
+	private static function registerFileReferenceEventListener() {
+		\OC\Collaboration\Reference\File\FileReferenceEventListener::register(Server::get(IEventDispatcher::class));
 	}
 
 	/**

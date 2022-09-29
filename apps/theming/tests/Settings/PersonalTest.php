@@ -45,12 +45,10 @@ use OCP\AppFramework\Services\IInitialState;
 use OCP\IConfig;
 use OCP\IL10N;
 use OCP\IURLGenerator;
-use OCP\IUserSession;
 use Test\TestCase;
 
 class PersonalTest extends TestCase {
 	private IConfig $config;
-	private IUserSession $userSession;
 	private ThemesService $themesService;
 	private IInitialState $initialStateService;
 
@@ -60,7 +58,6 @@ class PersonalTest extends TestCase {
 	protected function setUp(): void {
 		parent::setUp();
 		$this->config = $this->createMock(IConfig::class);
-		$this->userSession = $this->createMock(IUserSession::class);
 		$this->themesService = $this->createMock(ThemesService::class);
 		$this->initialStateService = $this->createMock(IInitialState::class);
 
@@ -74,7 +71,6 @@ class PersonalTest extends TestCase {
 		$this->admin = new Personal(
 			Application::APP_ID,
 			$this->config,
-			$this->userSession,
 			$this->themesService,
 			$this->initialStateService
 		);
@@ -87,7 +83,7 @@ class PersonalTest extends TestCase {
 				$this->formatThemeForm('default'),
 				$this->formatThemeForm('light'),
 				$this->formatThemeForm('dark'),
-				$this->formatThemeForm('highcontrast'),
+				$this->formatThemeForm('light-highcontrast'),
 				$this->formatThemeForm('dark-highcontrast'),
 				$this->formatThemeForm('opendyslexic'),
 			]],
@@ -166,7 +162,7 @@ class PersonalTest extends TestCase {
 				$config,
 				$l10n,
 			),
-			'highcontrast' => new HighContrastTheme(
+			'light-highcontrast' => new HighContrastTheme(
 				$util,
 				$themingDefaults,
 				$urlGenerator,

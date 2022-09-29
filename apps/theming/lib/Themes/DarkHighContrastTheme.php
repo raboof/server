@@ -49,40 +49,48 @@ class DarkHighContrastTheme extends DarkTheme implements ITheme {
 	}
 
 	/**
-	 * Try to keep this consistent with HighContrastTheme
+	 * Keep this consistent with other HighContrast Themes
 	 */
 	public function getCSSVariables(): array {
-		$variables = parent::getCSSVariables();
+		$defaultVariables = parent::getCSSVariables();
+
 		$colorMainText = '#ffffff';
 		$colorMainBackground = '#000000';
-		$colorBoxShadowRGB = join(',', $this->util->hexToRGB($colorMainText));
 
-		$variables['--color-main-background'] = $colorMainBackground;
-		$variables['--color-main-text'] = $colorMainText;
+		return array_merge(
+			$defaultVariables,
+			$this->generatePrimaryVariables($colorMainBackground, $colorMainText),
+			[
+				'--color-main-background' => $colorMainBackground,
+				'--color-main-background-translucent' => 'rgba(var(--color-main-background-rgb), .1)',
+				'--color-main-text' => $colorMainText,
 
-		$variables['--color-background-dark'] = $this->util->lighten($colorMainBackground, 30);
-		$variables['--color-background-darker'] = $this->util->lighten($colorMainBackground, 30);
+				'--color-background-dark' => $this->util->lighten($colorMainBackground, 30),
+				'--color-background-darker' => $this->util->lighten($colorMainBackground, 30),
 
-		$variables['--color-placeholder-light'] = $this->util->lighten($colorMainBackground, 30);
-		$variables['--color-placeholder-dark'] = $this->util->lighten($colorMainBackground, 45);
+				'--color-main-background-blur' => $colorMainBackground,
+				'--filter-background-blur' => 'none',
 
-		$variables['--color-text-maxcontrast'] = $colorMainText;
-		$variables['--color-text-light'] = $colorMainText;
-		$variables['--color-text-lighter'] = $colorMainText;
+				'--color-placeholder-light' => $this->util->lighten($colorMainBackground, 30),
+				'--color-placeholder-dark' => $this->util->lighten($colorMainBackground, 45),
 
-		// used for the icon loading animation
-		$variables['--color-loading-light'] = '#000000';
-		$variables['--color-loading-dark'] = '#dddddd';
+				'--color-text-maxcontrast' => $colorMainText,
+				'--color-text-light' => $colorMainText,
+				'--color-text-lighter' => $colorMainText,
 
+				'--color-scrollbar' => $this->util->lighten($colorMainBackground, 35),
 
-		$variables['--color-box-shadow-rgb'] = $colorBoxShadowRGB;
-		$variables['--color-box-shadow'] = $colorBoxShadowRGB;
+				// used for the icon loading animation
+				'--color-loading-light' => '#000000',
+				'--color-loading-dark' => '#dddddd',
 
+				'--color-box-shadow-rgb' => $colorMainText,
+				'--color-box-shadow' => $colorMainText,
 
-		$variables['--color-border'] = $this->util->lighten($colorMainBackground, 50);
-		$variables['--color-border-dark'] = $this->util->lighten($colorMainBackground, 50);
-
-		return $variables;
+				'--color-border' => $this->util->lighten($colorMainBackground, 50),
+				'--color-border-dark' => $this->util->lighten($colorMainBackground, 50),
+			]
+		);
 	}
 
 	public function getCustomCss(): string {

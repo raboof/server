@@ -22,8 +22,10 @@
  */
 namespace OCA\Theming\Tests\Controller;
 
+use OCA\Theming\AppInfo\Application;
 use OCA\Theming\Controller\UserThemeController;
 use OCA\Theming\ITheme;
+use OCA\Theming\Service\BackgroundService;
 use OCA\Theming\Themes\DarkHighContrastTheme;
 use OCA\Theming\Themes\DarkTheme;
 use OCA\Theming\Themes\DefaultTheme;
@@ -52,6 +54,9 @@ class UserThemeControllerTest extends TestCase {
 	private $userSession;
 	/** @var ThemeService|MockObject */
 	private $themesService;
+	/** @var BackgroundService|MockObject */
+	private $backgroundService;
+
 
 	/** @var ITheme[] */
 	private $themes;
@@ -61,12 +66,13 @@ class UserThemeControllerTest extends TestCase {
 		$this->config = $this->createMock(IConfig::class);
 		$this->userSession = $this->createMock(IUserSession::class);
 		$this->themesService = $this->createMock(ThemesService::class);
+		$this->backgroundService = $this->createMock(BackgroundService::class);
 
 		$this->themes = [
 			'default' => $this->createMock(DefaultTheme::class),
 			'light' => $this->createMock(LightTheme::class),
 			'dark' => $this->createMock(DarkTheme::class),
-			'highcontrast' => $this->createMock(HighContrastTheme::class),
+			'light-highcontrast' => $this->createMock(HighContrastTheme::class),
 			'dark-highcontrast' => $this->createMock(DarkHighContrastTheme::class),
 			'opendyslexic' => $this->createMock(DyslexiaFont::class),
 		];
@@ -80,11 +86,12 @@ class UserThemeControllerTest extends TestCase {
 			->willReturn('user');
 
 		$this->userThemeController = new UserThemeController(
-			'theming',
+			Application::APP_ID,
 			$this->request,
 			$this->config,
 			$this->userSession,
 			$this->themesService,
+			$this->backgroundService,
 		);
 
 		parent::setUp();
@@ -95,7 +102,7 @@ class UserThemeControllerTest extends TestCase {
 			['default'],
 			['light'],
 			['dark'],
-			['highcontrast'],
+			['light-highcontrast'],
 			['dark-highcontrast'],
 			['opendyslexic'],
 			['', OCSBadRequestException::class],

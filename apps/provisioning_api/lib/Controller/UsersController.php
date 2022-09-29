@@ -350,7 +350,7 @@ class UsersController extends AUserData {
 
 		if ($this->userManager->userExists($userid)) {
 			$this->logger->error('Failed addUser attempt: User already exists.', ['app' => 'ocs_api']);
-			throw new OCSException('User already exists', 102);
+			throw new OCSException($this->l10nFactory->get('provisioning_api')->t('User already exists'), 102);
 		}
 
 		if ($groups !== []) {
@@ -426,7 +426,14 @@ class UsersController extends AUserData {
 			}
 
 			if ($displayName !== '') {
-				$this->editUser($userid, self::USER_FIELD_DISPLAYNAME, $displayName);
+				try {
+					$this->editUser($userid, self::USER_FIELD_DISPLAYNAME, $displayName);
+				} catch (OCSException $e) {
+					if ($newUser instanceof IUser) {
+						$newUser->delete();
+					}
+					throw $e;
+				}
 			}
 
 			if ($quota !== '') {
@@ -470,7 +477,7 @@ class UsersController extends AUserData {
 			throw new OCSException($e->getHint(), 107);
 		} catch (OCSException $e) {
 			$this->logger->warning(
-				'Failed addUser attempt with ocs exeption.',
+				'Failed addUser attempt with ocs exception.',
 				[
 					'app' => 'ocs_api',
 					'exception' => $e,
@@ -479,7 +486,7 @@ class UsersController extends AUserData {
 			throw $e;
 		} catch (InvalidArgumentException $e) {
 			$this->logger->error(
-				'Failed addUser attempt with invalid argument exeption.',
+				'Failed addUser attempt with invalid argument exception.',
 				[
 					'app' => 'ocs_api',
 					'exception' => $e,
@@ -837,8 +844,10 @@ class UsersController extends AUserData {
 		switch ($key) {
 			case self::USER_FIELD_DISPLAYNAME:
 			case IAccountManager::PROPERTY_DISPLAYNAME:
-				if (!$targetUser->setDisplayName($value)) {
-					throw new OCSException('Invalid displayname', 102);
+				try {
+					$targetUser->setDisplayName($value);
+				} catch (InvalidArgumentException $e) {
+					throw new OCSException($e->getMessage(), 101);
 				}
 				break;
 			case self::USER_FIELD_QUOTA:

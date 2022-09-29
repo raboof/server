@@ -667,25 +667,39 @@ $CONFIG = [
  * for when files and folders in the trash bin will be permanently deleted.
  * The app allows for two settings, a minimum time for trash bin retention,
  * and a maximum time for trash bin retention.
+ *
  * Minimum time is the number of days a file will be kept, after which it
- * may be deleted. Maximum time is the number of days at which it is guaranteed
- * to be deleted.
+ * _may be_ deleted. A file may be deleted after the minimum number of days 
+ * is expired if space is needed. The file will not be deleted if space is 
+ * not needed. 
+ *
+ * Whether "space is needed" depends on whether a user quota is defined or not:
+ *
+ *  * If no user quota is defined, the available space on the Nextcloud data 
+ *    partition sets the limit for the trashbin
+ *    (issues: see https://github.com/nextcloud/server/issues/28451).
+ *  * If a user quota is defined, 50% of the user's remaining quota space sets 
+ *    the limit for the trashbin.
+ *
+ * Maximum time is the number of days at which it is _guaranteed
+ * to be_ deleted. There is no further dependency on the available space.
+ *
  * Both minimum and maximum times can be set together to explicitly define
  * file and folder deletion. For migration purposes, this setting is installed
  * initially set to "auto", which is equivalent to the default setting in
  * Nextcloud.
  *
- * Available values:
+ * Available values (D1 and D2 are configurable numbers):
  *
  * * ``auto``
  *     default setting. keeps files and folders in the trash bin for 30 days
  *     and automatically deletes anytime after that if space is needed (note:
  *     files may not be deleted if space is not needed).
- * * ``D, auto``
- *     keeps files and folders in the trash bin for D+ days, delete anytime if
+ * * ``D1, auto``
+ *     keeps files and folders in the trash bin for D1+ days, delete anytime if
  *     space needed (note: files may not be deleted if space is not needed)
- * * ``auto, D``
- *     delete all files in the trash bin that are older than D days
+ * * ``auto, D2``
+ *     delete all files in the trash bin that are older than D2 days
  *     automatically, delete other files anytime if space needed
  * * ``D1, D2``
  *     keep files and folders in the trash bin for at least D1 days and
@@ -1755,6 +1769,15 @@ $CONFIG = [
 'tempdirectory' => '/tmp/nextcloudtemp',
 
 /**
+ * Override where Nextcloud stores update files while updating. Useful in situations
+ * where the default `datadirectory` is on network disk like NFS, or is otherwise
+ * restricted. Defaults to the value of `datadirectory` if unset.
+ *
+ * The Web server user must have write access to this directory.
+ */
+'updatedirectory' => '',
+
+/**
  * Hashing
  */
 
@@ -1886,6 +1909,14 @@ $CONFIG = [
  * Defaults to ``0022``
  */
 'localstorage.umask' => 0022,
+
+/**
+ * This options allows storage systems that don't allow to modify existing files
+ * to overcome this limitation by removing the files before overwriting.
+ *
+ * Defaults to ``false``
+ */
+'localstorage.unlink_on_truncate' => false,
 
 /**
  * EXPERIMENTAL: option whether to include external storage in quota
@@ -2245,4 +2276,11 @@ $CONFIG = [
  * Defaults to ``true``
  */
 'bulkupload.enabled' => true,
+
+/**
+ * Enables fetching open graph metadata from remote urls
+ *
+ * Defaults to ``true``
+ */
+'reference_opengraph' => true,
 ];
