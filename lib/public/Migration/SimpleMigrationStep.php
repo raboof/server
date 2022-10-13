@@ -28,6 +28,8 @@ declare(strict_types=1);
  */
 namespace OCP\Migration;
 
+use OCP\DB\ISchemaWrapper;
+
 /**
  * @since 13.0.0
  */
@@ -68,7 +70,7 @@ abstract class SimpleMigrationStep implements IMigrationStep {
 	 * @return null|ISchemaWrapper
 	 * @since 13.0.0
 	 */
-	public function changeSchema(IOutput $output, \Closure $schemaClosure, array $options) {
+	public function changeSchema(IOutput $output, \Closure $schemaClosure, array $options): ?ISchemaWrapper {
 		return null;
 	}
 
