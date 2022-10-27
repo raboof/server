@@ -125,19 +125,36 @@ class ThemingAppContext implements Context, ActorAwareInterface {
 	}
 
 	/**
-	 * @Then I see that the header color is eventually :color
+	 * @Then I see that the primary color is eventually :color
 	 */
-	public function iSeeThatTheHeaderColorIsEventually($color) {
-		$headerColorMatchesCallback = function () use ($color) {
-			$headerColor = $this->actor->getSession()->evaluateScript("return $('#header').css('background-color');");
-			$headerColor = $this->getRGBArray($headerColor);
+	public function iSeeThatThePrimaryColorIsEventually($color) {
+		$primaryColorMatchesCallback = function () use ($color) {
+			$primaryColor = $this->actor->getSession()->evaluateScript("return getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();");
+			$primaryColor = $this->getRGBArray($primaryColor);
 			$color = $this->getRGBArray($color);
 
-			return $headerColor == $color;
+			return $primaryColor == $color;
 		};
 
-		if (!Utils::waitFor($headerColorMatchesCallback, $timeout = 10 * $this->actor->getFindTimeoutMultiplier(), $timeoutStep = 1)) {
-			Assert::fail("The header color is not $color yet after $timeout seconds");
+		if (!Utils::waitFor($primaryColorMatchesCallback, $timeout = 10 * $this->actor->getFindTimeoutMultiplier(), $timeoutStep = 1)) {
+			Assert::fail("The primary color is not $color yet after $timeout seconds");
+		}
+	}
+
+	/**
+	 * @Then I see that the non-plain background color variable is eventually :color
+	 */
+	public function iSeeThatTheNonPlainBackgroundColorVariableIsEventually($color) {
+		$colorVariableMatchesCallback = function () use ($color) {
+			$colorVariable = $this->actor->getSession()->evaluateScript("return getComputedStyle(document.documentElement).getPropertyValue('--color-primary-default').trim();");
+			$colorVariable = $this->getRGBArray($colorVariable);
+			$color = $this->getRGBArray($color);
+
+			return $colorVariable == $color;
+		};
+
+		if (!Utils::waitFor($colorVariableMatchesCallback, $timeout = 10 * $this->actor->getFindTimeoutMultiplier(), $timeoutStep = 1)) {
+			Assert::fail("The non-plain background color variable is not $color yet after $timeout seconds");
 		}
 	}
 

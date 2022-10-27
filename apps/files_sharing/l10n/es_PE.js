@@ -12,10 +12,13 @@ OC.L10N.register(
     "Files and folders you share by link will show up here" : "Los archivos y carpetas que compartas por ligas se mostrarán aquí",
     "Shares" : "Elementos compartidos",
     "Restore" : "Restaurar",
+    "This will stop your current uploads." : "Se detendrán las cargas en curso",
     "Move or copy" : "Mover o copiar",
     "Download" : "Descargar",
     "Delete" : "Borrar",
     "You can upload into this folder" : "Puedes cargar archivos dentro de esta carpeta",
+    "Show list view" : "Mostrar vista de lista",
+    "Show grid view" : "Mostrar lista en grilla",
     "No compatible server found at {remote}" : "No se encontró un servidor compatible en {remote}",
     "Invalid server URL" : "URL del servidor inválido",
     "Failed to add the public link to your Nextcloud" : "Se presentó una falla al agregar la liga pública a tu Nextcloud",
@@ -84,7 +87,6 @@ OC.L10N.register(
     "Not a directory" : "No es una carpeta",
     "Could not lock path" : "No fue posible bloquear la ruta",
     "Wrong or no update parameter given" : "El parametro de actualización está erróneo o falta",
-    "Cannot increase permissions" : "No es posible incrementar los permisos",
     "shared by %s" : "compartido por %s",
     "Direct link" : "Liga directa",
     "Share API is disabled" : "El API para compartir está deshabilitado",
@@ -131,6 +133,7 @@ OC.L10N.register(
     "Add to your Nextcloud" : "Agregar a tu Nextcloud",
     "Wrong share ID, share doesn't exist" : "ID del elemento compartido equivocado, el elemento compartido no existe",
     "Wrong path, file/folder doesn't exist" : "La ruta es incorrecta, el archivo/carpeta no existe",
-    "Sorry, this link doesn’t seem to work anymore." : "Lo sentimos, parece que esta liga ya no funciona. "
+    "Sorry, this link doesn’t seem to work anymore." : "Lo sentimos, parece que esta liga ya no funciona. ",
+    "Cannot increase permissions" : "No es posible incrementar los permisos"
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

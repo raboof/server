@@ -35,7 +35,11 @@ OC.L10N.register(
     "Legal notice" : "Informação legal",
     "Privacy policy" : "Política de privacidade",
     "Adjust the Nextcloud theme" : "Configurar o tema do Nextcloud",
+    "Keyboard shortcuts" : "Atalhos de teclado",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "O acesso universal é muito importante para nós. Seguimos os padrões da web e verificamos para tornar tudo utilizável também sem rato e software auxiliar, como leitores de ecrã. O nosso objetivo é estar em conformidade com as {guidelines} Diretrizes de acessibilidade para o conteúdo da Web {linkend} 2.1 no nível AA, com o tema de alto contraste, mesmo no nível AAA.",
+    "Pick from Files" : "Escolha a partir dos Ficheiros",
+    "Plain background" : "Fundo simples",
+    "Insert from {productName}" : "Inserir de {productName}",
     "Open documentation" : "Abrir documentação",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "A tematização possibilita a fácil personalização da aparência da sua instância e clientes suportados. Isto será visível para todos os utilizadores",
     "Name" : "Nome",
@@ -46,7 +50,6 @@ OC.L10N.register(
     "Color" : "Cor",
     "Logo" : "Logótipo",
     "Upload new logo" : "Carregar novo logótipo",
-    "Login image" : "Imagem de Login",
     "Upload new login background" : "Carregar imagem de segundo plano de Login",
     "Remove background image" : "Remover imagem de segundo plano",
     "Advanced options" : "Opções avançadas",
@@ -56,6 +59,7 @@ OC.L10N.register(
     "Upload new header logo" : "Carregar logótipo do cabeçalho",
     "Favicon" : "Favicon",
     "Upload new favicon" : "Carregar novo favicon",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Instale a extensão PHP Imagemagick com suporte para imagens SVG para gerar automaticamente favicons com base na cor e no logotipo carregado."
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Instale a extensão PHP Imagemagick com suporte para imagens SVG para gerar automaticamente favicons com base na cor e no logotipo carregado.",
+    "Login image" : "Imagem de Login"
 },
 "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");

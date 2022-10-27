@@ -69,6 +69,8 @@ class Local extends \OC\Files\Storage\Common {
 
 	private $defUMask;
 
+	protected bool $unlinkOnTruncate;
+
 	public function __construct($arguments) {
 		if (!isset($arguments['datadir']) || !is_string($arguments['datadir'])) {
 			throw new \InvalidArgumentException('No data directory set for local storage');
@@ -88,6 +90,9 @@ class Local extends \OC\Files\Storage\Common {
 		$this->config = \OC::$server->get(IConfig::class);
 		$this->mimeTypeDetector = \OC::$server->get(IMimeTypeDetector::class);
 		$this->defUMask = $this->config->getSystemValue('localstorage.umask', 0022);
+
+		// support Write-Once-Read-Many file systems
+		$this->unlinkOnTruncate = $this->config->getSystemValue('localstorage.unlink_on_truncate', false);
 	}
 
 	public function __destruct() {
@@ -161,6 +166,9 @@ class Local extends \OC\Files\Storage\Common {
 	public function stat($path) {
 		$fullPath = $this->getSourcePath($path);
 		clearstatcache(true, $fullPath);
+		if (!file_exists($fullPath)) {
+			return false;
+		}
 		$statResult = @stat($fullPath);
 		if (PHP_INT_SIZE === 4 && $statResult && !$this->is_dir($path)) {
 			$filesize = $this->filesize($path);
@@ -297,6 +305,9 @@ class Local extends \OC\Files\Storage\Common {
 
 	public function file_put_contents($path, $data) {
 		$oldMask = umask($this->defUMask);
+		if ($this->unlinkOnTruncate) {
+			$this->unlink($path);
+		}
 		$result = file_put_contents($this->getSourcePath($path), $data);
 		umask($oldMask);
 		return $result;
@@ -322,9 +333,9 @@ class Local extends \OC\Files\Storage\Common {
 		}
 	}
 
-	public function rename($path1, $path2) {
-		$srcParent = dirname($path1);
-		$dstParent = dirname($path2);
+	public function rename($source, $target) {
+		$srcParent = dirname($source);
+		$dstParent = dirname($target);
 
 		if (!$this->isUpdatable($srcParent)) {
 			\OC::$server->get(LoggerInterface::class)->error('unable to rename, source directory is not writable : ' . $srcParent, ['app' => 'core']);
@@ -336,49 +347,59 @@ class Local extends \OC\Files\Storage\Common {
 			return false;
 		}
 
-		if (!$this->file_exists($path1)) {
-			\OC::$server->get(LoggerInterface::class)->error('unable to rename, file does not exists : ' . $path1, ['app' => 'core']);
+		if (!$this->file_exists($source)) {
+			\OC::$server->get(LoggerInterface::class)->error('unable to rename, file does not exists : ' . $source, ['app' => 'core']);
 			return false;
 		}
 
-		if ($this->is_dir($path2)) {
-			$this->rmdir($path2);
-		} elseif ($this->is_file($path2)) {
-			$this->unlink($path2);
+		if ($this->is_dir($target)) {
+			$this->rmdir($target);
+		} elseif ($this->is_file($target)) {
+			$this->unlink($target);
 		}
 
-		if ($this->is_dir($path1)) {
+		if ($this->is_dir($source)) {
 			// we can't move folders across devices, use copy instead
-			$stat1 = stat(dirname($this->getSourcePath($path1)));
-			$stat2 = stat(dirname($this->getSourcePath($path2)));
+			$stat1 = stat(dirname($this->getSourcePath($source)));
+			$stat2 = stat(dirname($this->getSourcePath($target)));
 			if ($stat1['dev'] !== $stat2['dev']) {
-				$result = $this->copy($path1, $path2);
+				$result = $this->copy($source, $target);
 				if ($result) {
-					$result &= $this->rmdir($path1);
+					$result &= $this->rmdir($source);
 				}
 				return $result;
 			}
 
-			$this->checkTreeForForbiddenItems($this->getSourcePath($path1));
+			$this->checkTreeForForbiddenItems($this->getSourcePath($source));
 		}
 
-		return rename($this->getSourcePath($path1), $this->getSourcePath($path2));
+		return rename($this->getSourcePath($source), $this->getSourcePath($target));
 	}
 
-	public function copy($path1, $path2) {
-		if ($this->is_dir($path1)) {
-			return parent::copy($path1, $path2);
+	public function copy($source, $target) {
+		if ($this->is_dir($source)) {
+			return parent::copy($source, $target);
 		} else {
 			$oldMask = umask($this->defUMask);
-			$result = copy($this->getSourcePath($path1), $this->getSourcePath($path2));
+			if ($this->unlinkOnTruncate) {
+				$this->unlink($target);
+			}
+			$result = copy($this->getSourcePath($source), $this->getSourcePath($target));
 			umask($oldMask);
 			return $result;
 		}
 	}
 
 	public function fopen($path, $mode) {
+		$sourcePath = $this->getSourcePath($path);
+		if (!file_exists($sourcePath) && $mode === 'r') {
+			return false;
+		}
 		$oldMask = umask($this->defUMask);
-		$result = fopen($this->getSourcePath($path), $mode);
+		if (($mode === 'w' || $mode === 'w+') && $this->unlinkOnTruncate) {
+			$this->unlink($path);
+		}
+		$result = @fopen($sourcePath, $mode);
 		umask($oldMask);
 		return $result;
 	}

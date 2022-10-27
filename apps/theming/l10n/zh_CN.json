@@ -24,6 +24,7 @@
     "No file uploaded" : "文件没有上传",
     "You are already using a custom theme. Theming app settings might be overwritten by that." : "你已经在使用一个自定义的主题。主题应用的设置可能会被其覆盖。",
     "Theming" : "主题",
+    "Appearance and accessibility" : "外观和可访问性",
     "Dark theme" : "深色主题",
     "Enable dark theme" : "启用深色主题",
     "Dyslexia font" : "阅读障碍字体",
@@ -35,7 +36,13 @@
     "Legal notice" : "法律声明",
     "Privacy policy" : "隐私政策",
     "Adjust the Nextcloud theme" : "调整 Nextcloud 主题",
+    "Keyboard shortcuts" : "键盘快捷键",
+    "Background" : "背景",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "通用访问对我们非常重要。 我们遵循网络标准，并进行检查以确保所有内容都可以在没有鼠标或辅助软件（例如屏幕阅读器）的情况下使用。 我们的目标是遵守 {guidelines} Web 内容可访问性指南 {linkend} 2.1 能达到 AA 级别，具有高对比度主题甚至能达到 AAA 级别。",
+    "Pick from Files" : "从文件中挑选",
+    "Custom color" : "自定义颜色",
+    "Plain background" : "纯色背景",
+    "Insert from {productName}" : "从 {productName} 插入",
     "Open documentation" : "打开文档",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "主题使得方便地定制您的实例的外观和体验成为可能。所有用户都可以使用。",
     "Name" : "名字",
@@ -46,7 +53,6 @@
     "Color" : "颜色",
     "Logo" : "图标",
     "Upload new logo" : "上传新的图标",
-    "Login image" : "登录图片",
     "Upload new login background" : "上传新登录背景",
     "Remove background image" : "删除背景图片",
     "Advanced options" : "高级选项",
@@ -56,6 +62,8 @@
     "Upload new header logo" : "上传新的顶栏图标",
     "Favicon" : "网站图标",
     "Upload new favicon" : "上传新图标",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "安装支持 SVG 图像的 PHP 扩展 Imagemagick，以根据上传的 logo 和颜色自动生成图标。"
+    "User settings" : "用户设置",
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "安装支持 SVG 图像的 PHP 扩展 Imagemagick，以根据上传的 logo 和颜色自动生成图标。",
+    "Login image" : "登录图片"
 },"pluralForm" :"nplurals=1; plural=0;"
 }

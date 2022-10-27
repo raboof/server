@@ -26,6 +26,8 @@
 }
 #theming form.uploadButton {
   width: 411px;
+  display: flex;
+  align-items: center;
 }
 #theming form .theme-undo,
 #theming .theme-remove-bg {
@@ -41,6 +43,10 @@
   visibility: visible;
   height: 32px;
   width: 32px;
+  margin-left: auto;
+}
+#theming form .theme-undo:not([style*="display:"]) ~ .theme-remove-bg {
+  margin-left: 0;
 }
 #theming input[type=text]:hover + .theme-undo,
 #theming input[type=text] + .theme-undo:hover,
@@ -55,6 +61,8 @@
 #theming label span {
   display: inline-block;
   min-width: 175px;
+  max-width: 175px;
+  white-space: wrap;
   padding: 8px 0px;
   vertical-align: top;
 }
@@ -89,8 +97,8 @@
   margin-top: 10px;
   margin-bottom: 20px;
   cursor: pointer;
-  background-color: var(--color-primary);
-  background-image: var(--image-background, var(--image-background-plain, url("../../../core/img/background.svg"), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%)));
+  background-color: var(--color-primary-default);
+  background-image: var(--image-background, var(--image-background-plain, url("../../../core/img/app-background.jpg"), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%)));
 }
 #theming #theming-preview #theming-preview-logo {
   cursor: pointer;
@@ -119,6 +127,14 @@
 }
 #theming #theming-preview-favicon {
   background-image: var(--image-favicon);
+}
+#theming #user-theming {
+  margin-top: 44px;
+  display: flex;
+}
+#theming #user-theming > div {
+  max-width: 400px;
+  margin-bottom: 44px;
 }
 
 /* transition effects for theming value changes */

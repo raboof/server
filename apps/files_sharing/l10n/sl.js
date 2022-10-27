@@ -35,6 +35,8 @@ OC.L10N.register(
     "Delete" : "Izbriši",
     "You can upload into this folder" : "V to mapo je dovoljeno pošiljati datoteke",
     "Terms of service" : "Pogoji uporabe storitve",
+    "Show list view" : "Pokaži seznamski pogled",
+    "Show grid view" : "Pokaži mrežni pogled",
     "No compatible server found at {remote}" : "Skladnega strežnika na {remote} ni mogoče najti",
     "Invalid server URL" : "Neveljaven naslov URL strežnika",
     "Failed to add the public link to your Nextcloud" : "Dodajanje javne povezave v oblak je spodletelo.",
@@ -122,7 +124,6 @@ OC.L10N.register(
     "Could not lock node" : "Vozlišča ni mogoče zakleniti",
     "Could not lock path" : "Poti ni mogoče zakleniti",
     "Wrong or no update parameter given" : "Parameter posodobitve ni podan, ali pa je navedena napačna vrednost",
-    "Cannot increase permissions" : "Ni mogoče povišati dovoljenj",
     "shared by %s" : "souporaba: %s",
     "Download all files" : "Prejmi vse datoteke",
     "Direct link" : "Neposredna povezava",
@@ -232,8 +233,6 @@ OC.L10N.register(
     "sharing is disabled" : "souporaba je onemogočena.",
     "For more info, please ask the person who sent this link." : "Za več podrobnosti stopite v stik s pošiljateljem te povezave.",
     "Share note" : "Omogoči souporabo zabeležke",
-    "Show list view" : "Pokaži seznamski pogled",
-    "Show grid view" : "Pokaži mrežni pogled",
     "Upload files to %s" : "Pošlji datoteke v račun %s",
     "Note" : "Opomba",
     "Select or drop files" : "Izberte ali povlecite datoteke",
@@ -246,6 +245,7 @@ OC.L10N.register(
     "Cannot change permissions for public share links" : "Za javne povezave souporabe spreminjanje dovoljenj ni mogoče.",
     "Sharing sending the password by Nextcloud Talk failed because Nextcloud Talk is not enabled" : "Souporaba s pošiljanjem gesla prek programa Nextcloud Talk je spodletela, ker program Talk ni omogočen.",
     "Sorry, this link doesn’t seem to work anymore." : "Povezava očitno ni več v uporabi.",
-    "Toggle grid view" : "Preklopi mrežni pogled"
+    "Toggle grid view" : "Preklopi mrežni pogled",
+    "Cannot increase permissions" : "Ni mogoče povišati dovoljenj"
 },
 "nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);");

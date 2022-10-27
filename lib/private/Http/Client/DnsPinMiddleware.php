@@ -125,7 +125,7 @@ class DnsPinMiddleware {
 					$ports[] = (string)$port;
 				}
 
-				$targetIps = $this->dnsResolve($hostName, 0);
+				$targetIps = $this->dnsResolve(idn_to_utf8($hostName), 0);
 
 				$curlResolves = [];
 
@@ -133,7 +133,7 @@ class DnsPinMiddleware {
 					$curlResolves["$hostName:$port"] = [];
 
 					foreach ($targetIps as $ip) {
-						$this->localAddressChecker->ThrowIfLocalIp($ip);
+						$this->localAddressChecker->throwIfLocalIp($ip);
 						$curlResolves["$hostName:$port"][] = $ip;
 					}
 				}

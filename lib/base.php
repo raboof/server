@@ -72,6 +72,7 @@ use OC\Encryption\HookManager;
 use OC\Files\Filesystem;
 use OC\Share20\Hooks;
 use OCP\User\Events\UserChangedEvent;
+use function OCP\Log\logger;
 
 require_once 'public/Constants.php';
 
@@ -755,11 +756,11 @@ class OC {
 		}
 
 		self::registerCleanupHooks($systemConfig);
-		self::registerFilesystemHooks();
 		self::registerShareHooks($systemConfig);
 		self::registerEncryptionWrapperAndHooks();
 		self::registerAccountHooks();
 		self::registerResourceCollectionHooks();
+		self::registerFileReferenceEventListener();
 		self::registerAppRestrictionsHooks();
 
 		// Make sure that the application class is not loaded before the database is setup
@@ -812,7 +813,7 @@ class OC {
 			if (!$isScssRequest) {
 				http_response_code(400);
 
-				\OC::$server->getLogger()->warning(
+				\OC::$server->getLogger()->info(
 					'Trusted domain error. "{remoteAddress}" tried to access using "{host}" as host.',
 					[
 						'app' => 'core',
@@ -922,13 +923,8 @@ class OC {
 		\OC\Collaboration\Resources\Listener::register(Server::get(SymfonyAdapter::class), Server::get(IEventDispatcher::class));
 	}
 
-	/**
-	 * register hooks for the filesystem
-	 */
-	public static function registerFilesystemHooks() {
-		// Check for blacklisted files
-		OC_Hook::connect('OC_Filesystem', 'write', Filesystem::class, 'isBlacklisted');
-		OC_Hook::connect('OC_Filesystem', 'rename', Filesystem::class, 'isBlacklisted');
+	private static function registerFileReferenceEventListener() {
+		\OC\Collaboration\Reference\File\FileReferenceEventListener::register(Server::get(IEventDispatcher::class));
 	}
 
 	/**
@@ -1084,15 +1080,28 @@ class OC {
 			return;
 		}
 
-		// Someone is logged in
-		if (\OC::$server->getUserSession()->isLoggedIn()) {
-			OC_App::loadApps();
-			OC_User::setupBackends();
-			OC_Util::setupFS();
-			header('Location: ' . \OC::$server->getURLGenerator()->linkToDefaultPageUrl());
-		} else {
-			// Not handled and not logged in
-			header('Location: ' . \OC::$server->getURLGenerator()->linkToRouteAbsolute('core.login.showLoginForm'));
+		// Redirect to the default app or login only as an entry point
+		if ($requestPath === '') {
+			// Someone is logged in
+			if (\OC::$server->getUserSession()->isLoggedIn()) {
+				header('Location: ' . \OC::$server->getURLGenerator()->linkToDefaultPageUrl());
+			} else {
+				// Not handled and not logged in
+				header('Location: ' . \OC::$server->getURLGenerator()->linkToRouteAbsolute('core.login.showLoginForm'));
+			}
+			return;
+		}
+
+		try {
+			return OC::$server->get(\OC\Route\Router::class)->match('/error/404');
+		} catch (\Exception $e) {
+			logger('core')->emergency($e->getMessage(), ['exception' => $e]);
+			$l = \OC::$server->getL10N('lib');
+			OC_Template::printErrorPage(
+				$l->t('404'),
+				$l->t('The page could not be found on the server.'),
+				404
+			);
 		}
 	}
 

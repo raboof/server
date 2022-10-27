@@ -34,6 +34,7 @@ use OC\AppFramework\Bootstrap\Coordinator;
 use OC\Preview\Generator;
 use OC\Preview\GeneratorHelper;
 use OCP\AppFramework\QueryException;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\Files\File;
 use OCP\Files\IAppData;
 use OCP\Files\IRootFolder;
@@ -51,7 +52,8 @@ class PreviewManager implements IPreview {
 	protected IConfig $config;
 	protected IRootFolder $rootFolder;
 	protected IAppData $appData;
-	protected EventDispatcherInterface $eventDispatcher;
+	protected IEventDispatcher $eventDispatcher;
+	protected EventDispatcherInterface $legacyEventDispatcher;
 	private ?Generator $generator = null;
 	private GeneratorHelper $helper;
 	protected bool $providerListDirty = false;
@@ -73,20 +75,22 @@ class PreviewManager implements IPreview {
 	private IBinaryFinder $binaryFinder;
 
 	public function __construct(
-		IConfig $config,
-		IRootFolder $rootFolder,
-		IAppData $appData,
-		EventDispatcherInterface $eventDispatcher,
-		GeneratorHelper $helper,
-		?string $userId,
-		Coordinator $bootstrapCoordinator,
-		IServerContainer $container,
-		IBinaryFinder $binaryFinder
+		IConfig                  $config,
+		IRootFolder              $rootFolder,
+		IAppData                 $appData,
+		IEventDispatcher 		 $eventDispatcher,
+		EventDispatcherInterface $legacyEventDispatcher,
+		GeneratorHelper          $helper,
+		?string                  $userId,
+		Coordinator              $bootstrapCoordinator,
+		IServerContainer         $container,
+		IBinaryFinder            $binaryFinder
 	) {
 		$this->config = $config;
 		$this->rootFolder = $rootFolder;
 		$this->appData = $appData;
 		$this->eventDispatcher = $eventDispatcher;
+		$this->legacyEventDispatcher = $legacyEventDispatcher;
 		$this->helper = $helper;
 		$this->userId = $userId;
 		$this->bootstrapCoordinator = $bootstrapCoordinator;
@@ -153,6 +157,7 @@ class PreviewManager implements IPreview {
 					$this->rootFolder,
 					$this->config
 				),
+				$this->legacyEventDispatcher,
 				$this->eventDispatcher
 			);
 		}
@@ -385,10 +390,10 @@ class PreviewManager implements IPreview {
 			if (count($checkImagick->queryFormats('PDF')) === 1) {
 				// Office requires openoffice or libreoffice
 				$officeBinary = $this->config->getSystemValue('preview_libreoffice_path', null);
-				if (is_null($officeBinary)) {
+				if (!is_string($officeBinary)) {
 					$officeBinary = $this->binaryFinder->findBinaryPath('libreoffice');
 				}
-				if (is_null($officeBinary)) {
+				if (!is_string($officeBinary)) {
 					$officeBinary = $this->binaryFinder->findBinaryPath('openoffice');
 				}
 
@@ -405,7 +410,7 @@ class PreviewManager implements IPreview {
 		// Video requires avconv or ffmpeg
 		if (in_array(Preview\Movie::class, $this->getEnabledDefaultProvider())) {
 			$movieBinary = $this->binaryFinder->findBinaryPath('avconv');
-			if (is_null($movieBinary)) {
+			if (!is_string($movieBinary)) {
 				$movieBinary = $this->binaryFinder->findBinaryPath('ffmpeg');
 			}
 

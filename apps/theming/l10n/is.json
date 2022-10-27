@@ -35,7 +35,10 @@
     "Legal notice" : "Lagaleg atriði",
     "Privacy policy" : "Stefna um meðferð persónulegra gagna",
     "Adjust the Nextcloud theme" : "Laga Nextcloud þema",
+    "Keyboard shortcuts" : "Flýtileiðir á lyklaborði",
+    "Background" : "Background",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "Aðgengi fyrir alla er okkur mikilvægt. Við fylgjum vefstöðlum oggöngum úr skugga um að allt sé nothæft án þess að nota tölvumús, auk þess að hjálpartæki á borð við skjálesara virki. Við miðum að samhæfni við {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 á stigi AA, og höfum meira að segja háskerpuþemað miðað við stig AAA.",
+    "Custom color" : "Sérsniðinn litur",
     "Open documentation" : "Opna hjálparskjöl",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "Þemu gera þér kleift að breyta útliti og hegðun þíns eintaks af viðmótinu auk studdra biðlaraforrita. Það verður sýnilegt öllum notendum.",
     "Name" : "Heiti",
@@ -46,7 +49,6 @@
     "Color" : "Litur",
     "Logo" : "Táknmerki",
     "Upload new logo" : "Senda inn nýtt táknmerki",
-    "Login image" : "Innskráningarmynd",
     "Upload new login background" : "Senda inn nýjan bakgrunn innskráningar",
     "Remove background image" : "Fjarlægja bakgrunnsmynd",
     "Advanced options" : "Ítarlegir valkostir",
@@ -56,6 +58,8 @@
     "Upload new header logo" : "Senda inn nýtt táknmerki fyrir síðuhaus",
     "Favicon" : "Veftákn",
     "Upload new favicon" : "Senda inn nýja táknmynd",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Settu inn Imagemagick PHP forritsviðaukann með stuðningi við SVG-myndir til að útbúa sjálfvirkt veftáknmyndir byggðar á innsendu táknmerki og lit."
+    "User settings" : "Notandastillingar",
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Settu inn Imagemagick PHP forritsviðaukann með stuðningi við SVG-myndir til að útbúa sjálfvirkt veftáknmyndir byggðar á innsendu táknmerki og lit.",
+    "Login image" : "Innskráningarmynd"
 },"pluralForm" :"nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);"
 }

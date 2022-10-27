@@ -37,7 +37,9 @@ OC.L10N.register(
     "Legal notice" : "Thông cáo pháp lý",
     "Privacy policy" : "Chính sách riêng tư",
     "Adjust the Nextcloud theme" : "Tinh chỉnh chủ đề Nextcloud",
+    "Keyboard shortcuts" : "Phím tắt",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "Sự truy cập đa dạng là rất quan trọng với chúng tôi. Chúng tôi tuân theo các tiêu chuẩn mạng và kiểm tra để khiến mọi thứ đều có thể sử dụng được ngay cả khi không có chuột, và hỗ trợ những phần mềm hỗ trợ như đọc màn hình. Chúng tôi hướng đến sự tương thích với {guidelines}Nguyên Tắc Truy Cập Cho Nội Dung Mạng{linkend} 2.1  ở cấp độ AA, với chế độ tương phản cao là AAA",
+    "Custom color" : "Tùy chỉnh màu",
     "Open documentation" : "Mở tài liệu",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "Điều chỉnh giao diện cho phép bạn có thể dễ dàng tùy biến bố cục trình bày của hệ thống. Khi thực hiện nó sẽ hiện hữu đối với tất cả người dùng",
     "Name" : "Tên",
@@ -48,7 +50,6 @@ OC.L10N.register(
     "Color" : "Màu sắc",
     "Logo" : "Logo",
     "Upload new logo" : "Tải lên logo mới",
-    "Login image" : "Hình ảnh trang đăng nhập",
     "Upload new login background" : "Tải lên ảnh nền trang đăng nhập mới",
     "Remove background image" : "Xóa bỏ ảnh nền",
     "Advanced options" : "Tùy chọn nâng cao",
@@ -58,6 +59,7 @@ OC.L10N.register(
     "Upload new header logo" : "Tải lên logo đầu trang mới",
     "Favicon" : "Favicon",
     "Upload new favicon" : "Tải lên bộ Favicon mới",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Cài đặt phần mở rộng PHP Imagemagick với hỗ trợ cho hình ảnh SVG để tự động tạo bộ favicon dựa trên màu và logo được tải lên"
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Cài đặt phần mở rộng PHP Imagemagick với hỗ trợ cho hình ảnh SVG để tự động tạo bộ favicon dựa trên màu và logo được tải lên",
+    "Login image" : "Hình ảnh trang đăng nhập"
 },
 "nplurals=1; plural=0;");

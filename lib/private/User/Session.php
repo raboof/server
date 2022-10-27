@@ -450,6 +450,9 @@ class Session implements IUserSession, Emitter {
 		if (!$this->login($user, $password)) {
 
 			// Failed, maybe the user used their email address
+			if (!filter_var($user, FILTER_VALIDATE_EMAIL)) {
+				return false;
+			}
 			$users = $this->manager->getByEmail($user);
 			if (!(\count($users) === 1 && $this->login($users[0]->getUID(), $password))) {
 				$this->logger->warning('Login failed: \'' . $user . '\' (Remote IP: \'' . \OC::$server->getRequest()->getRemoteAddress() . '\')', ['app' => 'core']);
@@ -865,6 +868,10 @@ class Session implements IUserSession, Emitter {
 		$tokens = $this->config->getUserKeys($uid, 'login_token');
 		// test cookies token against stored tokens
 		if (!in_array($currentToken, $tokens, true)) {
+			$this->logger->error('Tried to log in {uid} but could not verify token', [
+				'app' => 'core',
+				'uid' => $uid,
+			]);
 			return false;
 		}
 		// replace successfully used token with a new one
@@ -876,6 +883,10 @@ class Session implements IUserSession, Emitter {
 			$sessionId = $this->session->getId();
 			$token = $this->tokenProvider->renewSessionToken($oldSessionId, $sessionId);
 		} catch (SessionNotAvailableException $ex) {
+			$this->logger->warning('Could not renew session token for {uid} because the session is unavailable', [
+				'app' => 'core',
+				'uid' => $uid,
+			]);
 			return false;
 		} catch (InvalidTokenException $ex) {
 			$this->logger->warning('Renewing session token failed', ['app' => 'core']);

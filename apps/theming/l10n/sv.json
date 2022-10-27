@@ -24,6 +24,7 @@
     "No file uploaded" : "Ingen fil uppladdad",
     "You are already using a custom theme. Theming app settings might be overwritten by that." : "Du använder redan ett anpassat tema. Dessa appinställningar kan skrivas över.",
     "Theming" : "Teman",
+    "Appearance and accessibility" : "Utseende och tillgänglighet",
     "Dark theme" : "Mörkt tema",
     "Enable dark theme" : "Aktivera mörkt tema",
     "Dyslexia font" : "Teckensnitt för dyslektiker",
@@ -35,7 +36,12 @@
     "Legal notice" : "Rättsligt meddelande",
     "Privacy policy" : "Integritetspolicy",
     "Adjust the Nextcloud theme" : "Justera Nextcloud-tema",
+    "Keyboard shortcuts" : "Tangentbordsgenvägar",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "Allmän åtkomst är mycket viktig för oss. Vi följer webbstandarder och kontrollerar att allt är användbart även utan mus och hjälpmedel som skärmläsare. Vi strävar efter att följa {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 på AA-nivå, med temat hög kontrast även på AAA-nivå.",
+    "Pick from Files" : "Välj från filer",
+    "Custom color" : "Anpassad färg",
+    "Plain background" : "Enkel bakgrund",
+    "Insert from {productName}" : "Infoga från {productName}",
     "Open documentation" : "Öppna dokumentationen",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "Teman gör det möjligt att enkelt skräddarsy utseendet på ditt moln. Detta kommer att synas för alla användare.",
     "Name" : "Namn",
@@ -46,7 +52,6 @@
     "Color" : "Färg",
     "Logo" : "Logotyp",
     "Upload new logo" : "Ladda upp ny logotyp",
-    "Login image" : "Inloggningsbild",
     "Upload new login background" : "Ladda upp ny bakgrundsbild",
     "Remove background image" : "Ta bort bakgrundsbild",
     "Advanced options" : "Avancerade inställningar",
@@ -56,6 +61,8 @@
     "Upload new header logo" : "Ladda upp ny huvud-logga",
     "Favicon" : "Favicon",
     "Upload new favicon" : "Ladda upp nya favicon",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Installera Imagemagick PHP-tillägget med stöd för SVG-bilder för att automatiskt generera favicons baserat på den uppladdade logotypen och färgen."
+    "User settings" : "Användarinställningar",
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Installera Imagemagick PHP-tillägget med stöd för SVG-bilder för att automatiskt generera favicons baserat på den uppladdade logotypen och färgen.",
+    "Login image" : "Inloggningsbild"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

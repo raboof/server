@@ -161,6 +161,7 @@ class ClientTest extends \Test\TestCase {
 			['another-host.local'],
 			['service.localhost'],
 			['!@#$'], // test invalid url
+			['normal.host.com'],
 		];
 	}
 
@@ -202,7 +203,7 @@ class ClientTest extends \Test\TestCase {
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
 			->expects($this->once())
-			->method('ThrowIfLocalAddress')
+			->method('throwIfLocalAddress')
 			->with('http://' . $uri)
 			->will($this->throwException(new LocalServerException()));
 
@@ -217,7 +218,7 @@ class ClientTest extends \Test\TestCase {
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
 			->expects($this->once())
-			->method('ThrowIfLocalAddress')
+			->method('throwIfLocalAddress')
 			->with('http://' . $uri)
 			->will($this->throwException(new LocalServerException()));
 
@@ -232,7 +233,7 @@ class ClientTest extends \Test\TestCase {
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
 		->expects($this->once())
-		->method('ThrowIfLocalAddress')
+		->method('throwIfLocalAddress')
 		->with('http://' . $uri)
 		->will($this->throwException(new LocalServerException()));
 
@@ -247,7 +248,7 @@ class ClientTest extends \Test\TestCase {
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
 			->expects($this->once())
-			->method('ThrowIfLocalAddress')
+			->method('throwIfLocalAddress')
 			->with('http://' . $uri)
 			->will($this->throwException(new LocalServerException()));
 
@@ -262,7 +263,7 @@ class ClientTest extends \Test\TestCase {
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
 			->expects($this->once())
-			->method('ThrowIfLocalAddress')
+			->method('throwIfLocalAddress')
 			->with('http://' . $uri)
 			->will($this->throwException(new LocalServerException()));
 

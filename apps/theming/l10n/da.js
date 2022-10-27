@@ -26,6 +26,7 @@ OC.L10N.register(
     "No file uploaded" : "Ingen fil uploadet",
     "You are already using a custom theme. Theming app settings might be overwritten by that." : "Du bruger allerede et brugerdefineret tema. Theming app-indstillinger kan blive overskrevet af det.",
     "Theming" : "Temaer",
+    "Appearance and accessibility" : "Udseende og tilgængelighed",
     "Dark theme" : "Mørkt tema",
     "Enable dark theme" : "Aktiver Mørkt tema",
     "Dyslexia font" : "Skrifftype for ordblinde",
@@ -37,7 +38,13 @@ OC.L10N.register(
     "Legal notice" : "Juridisk notits",
     "Privacy policy" : "Fortrolighedspolitik",
     "Adjust the Nextcloud theme" : "Juster Nextcloud-temaet",
+    "Keyboard shortcuts" : "Tastaturgenveje",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "Universel adgang er meget vigtig for os. Vi følger web standarder og sikrer os at gøre alt tilgængeligt også uden mus, eller med hjælpesoftware såsom screenreaders. Vi søger at følge reglerne{guidelines}Web Content Accessibility Guidelines{linkend} 2.1 og AA endda med højt kontrast tema på AAA niveau.",
+    "Pick from Files" : "Vælg fra Filer",
+    "Default image" : "Standardbillede",
+    "Custom color" : "Brug brugerdefinerede farver",
+    "Plain background" : "Standard baggrund",
+    "Insert from {productName}" : "Indsæt fra {productName}",
     "Open documentation" : "Åbn dokumentation",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "Temaer gør det muligt nemt at tilpasse udseendet på din installation og understøttede klienter. Dette vil være synlig for alle brugere.",
     "Name" : "Navn",
@@ -48,7 +55,6 @@ OC.L10N.register(
     "Color" : "Farve",
     "Logo" : "Logo",
     "Upload new logo" : "Upload nyt logo",
-    "Login image" : "Login billede",
     "Upload new login background" : "Upload nyt login billede",
     "Remove background image" : "Fjern baggrundsbillede",
     "Advanced options" : "Avancerede indstillinger",
@@ -58,6 +64,7 @@ OC.L10N.register(
     "Upload new header logo" : "Upload nyt header-logo",
     "Favicon" : "Favicon",
     "Upload new favicon" : "Upload nyt favicon",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Installer Imagemagick PHP udvidelsen med SVG support for automatisk at genererer favikoner baseret på the uploadede logo og farver."
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Installer Imagemagick PHP udvidelsen med SVG support for automatisk at genererer favikoner baseret på the uploadede logo og farver.",
+    "Login image" : "Login billede"
 },
 "nplurals=2; plural=(n != 1);");

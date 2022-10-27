@@ -75,13 +75,14 @@ class Admin implements IDelegatedSettings {
 			'name' => $this->themingDefaults->getEntity(),
 			'url' => $this->themingDefaults->getBaseUrl(),
 			'slogan' => $this->themingDefaults->getSlogan(),
-			'color' => $this->themingDefaults->getColorPrimary(),
+			'color' => $this->themingDefaults->getDefaultColorPrimary(),
 			'uploadLogoRoute' => $this->urlGenerator->linkToRoute('theming.Theming.uploadImage'),
 			'canThemeIcons' => $this->imageManager->shouldReplaceIcons(),
 			'iconDocs' => $this->urlGenerator->linkToDocs('admin-theming-icons'),
 			'images' => $this->imageManager->getCustomImages(),
 			'imprintUrl' => $this->themingDefaults->getImprintUrl(),
 			'privacyUrl' => $this->themingDefaults->getPrivacyUrl(),
+			'userThemingDisabled' => $this->themingDefaults->isUserThemingDisabled(),
 		];
 
 		return new TemplateResponse($this->appName, 'settings-admin', $parameters, '');

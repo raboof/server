@@ -97,7 +97,7 @@ class AdminTest extends TestCase {
 			->willReturn('MySlogan');
 		$this->themingDefaults
 			->expects($this->once())
-			->method('getColorPrimary')
+			->method('getDefaultColorPrimary')
 			->willReturn('#fff');
 		$this->urlGenerator
 			->expects($this->once())
@@ -117,6 +117,7 @@ class AdminTest extends TestCase {
 			'images' => [],
 			'imprintUrl' => '',
 			'privacyUrl' => '',
+			'userThemingDisabled' => false,
 		];
 
 		$expected = new TemplateResponse('theming', 'settings-admin', $params, '');
@@ -156,7 +157,7 @@ class AdminTest extends TestCase {
 			->willReturn('MySlogan');
 		$this->themingDefaults
 			->expects($this->once())
-			->method('getColorPrimary')
+			->method('getDefaultColorPrimary')
 			->willReturn('#fff');
 		$this->urlGenerator
 			->expects($this->once())
@@ -176,6 +177,7 @@ class AdminTest extends TestCase {
 			'images' => [],
 			'imprintUrl' => '',
 			'privacyUrl' => '',
+			'userThemingDisabled' => false
 		];
 
 		$expected = new TemplateResponse('theming', 'settings-admin', $params, '');

@@ -37,7 +37,13 @@ OC.L10N.register(
     "Legal notice" : "法的通知",
     "Privacy policy" : "個人情報保護方針",
     "Adjust the Nextcloud theme" : "Nextcloudテーマを調整する",
+    "Keyboard shortcuts" : "キーボードショートカット",
+    "Background" : "背景",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "ユニバーサルアクセスは私たちにとって非常に重要なことです。そのためウェブ標準に従い、マウスやスクリーンリーダーなどの支援ソフトウェアが無くても全ての機能をご利用いただけるようにチェックしています。AAAレベルのハイコントラストのテーマを採用することで、{guidelines} Webコンテンツアクセシビリティガイドライン2.1  {linkend} のAAAレベルに準拠することを目指しています。",
+    "Pick from Files" : "ファイルから選択",
+    "Custom color" : "カスタム色",
+    "Plain background" : "シンプルな背景",
+    "Insert from {productName}" : "{productName} から挿入",
     "Open documentation" : "ドキュメントを開く",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "テーマでは、あなたのインスタンスとサポートされたクライアントのルック＆フィールを簡単に変更できます。この変更はすべてのユーザーが対象となります。",
     "Name" : "名前",
@@ -48,7 +54,6 @@ OC.L10N.register(
     "Color" : "色",
     "Logo" : "ロゴ",
     "Upload new logo" : "新しいロゴをアップロード",
-    "Login image" : "ログイン画像",
     "Upload new login background" : "新しいログイン背景画像をアップロード",
     "Remove background image" : "背景画像を削除",
     "Advanced options" : "詳細オプション",
@@ -58,6 +63,8 @@ OC.L10N.register(
     "Upload new header logo" : "新しいヘッダーロゴをアップロード",
     "Favicon" : "Favicon",
     "Upload new favicon" : "新しいfaviconをアップロード",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "アップロードしたロゴと色に基づいてfaviconを自動的に生成するには、SVG画像をサポートしているimagemagick PHP拡張をインストールしてください。"
+    "User settings" : "ユーザー設定",
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "アップロードしたロゴと色に基づいてfaviconを自動的に生成するには、SVG画像をサポートしているimagemagick PHP拡張をインストールしてください。",
+    "Login image" : "ログイン画像"
 },
 "nplurals=1; plural=0;");

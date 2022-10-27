@@ -47,7 +47,7 @@ class LocalAddressCheckerTest extends \Test\TestCase {
 	 */
 	public function testThrowIfLocalAddress($uri) : void {
 		$this->expectException(LocalServerException::class);
-		$this->localAddressChecker->ThrowIfLocalAddress('http://' . $uri);
+		$this->localAddressChecker->throwIfLocalAddress('http://' . $uri);
 	}
 
 	/**
@@ -55,7 +55,7 @@ class LocalAddressCheckerTest extends \Test\TestCase {
 	 * @param string $uri
 	 */
 	public function testThrowIfLocalAddressGood($uri) : void {
-		$this->localAddressChecker->ThrowIfLocalAddress('http://' . $uri);
+		$this->localAddressChecker->throwIfLocalAddress('http://' . $uri);
 		$this->assertTrue(true);
 	}
 
@@ -66,7 +66,7 @@ class LocalAddressCheckerTest extends \Test\TestCase {
 	 */
 	public function testThrowIfLocalIpBad($ip) : void {
 		$this->expectException(LocalServerException::class);
-		$this->localAddressChecker->ThrowIfLocalIp($ip);
+		$this->localAddressChecker->throwIfLocalIp($ip);
 	}
 
 	/**
@@ -74,7 +74,7 @@ class LocalAddressCheckerTest extends \Test\TestCase {
 	 * @param string $ip
 	 */
 	public function testThrowIfLocalIpGood($ip) : void {
-		$this->localAddressChecker->ThrowIfLocalIp($ip);
+		$this->localAddressChecker->throwIfLocalIp($ip);
 		$this->assertTrue(true);
 	}
 
@@ -91,7 +91,7 @@ class LocalAddressCheckerTest extends \Test\TestCase {
 		return [
 			['192.168.0.1'],
 			['fe80::200:5aee:feaa:20a2'],
-			['0:0:0:0:0:0:10.0.0.1'],
+			['0:0:0:0:0:ffff:10.0.0.1'],
 			['0:0:0:0:0:ffff:127.0.0.0'],
 			['10.0.0.1'],
 			['::'],
@@ -112,7 +112,7 @@ class LocalAddressCheckerTest extends \Test\TestCase {
 			['172.16.42.1'],
 			['[fdf8:f53b:82e4::53]/secret.ics'],
 			['[fe80::200:5aee:feaa:20a2]/secret.ics'],
-			['[0:0:0:0:0:0:10.0.0.1]/secret.ics'],
+			['[0:0:0:0:0:ffff:10.0.0.1]/secret.ics'],
 			['[0:0:0:0:0:ffff:127.0.0.0]/secret.ics'],
 			['10.0.0.1'],
 			['another-host.local'],
@@ -121,6 +121,25 @@ class LocalAddressCheckerTest extends \Test\TestCase {
 			['100.100.100.200'],
 			['192.0.0.1'],
 			['randomdomain.internal'],
+			['0177.0.0.9'],
+			['⑯⑨。②⑤④。⑯⑨｡②⑤④'],
+			['127。②⑤④。⑯⑨.②⑤④'],
+			['127.0.00000000000000000000000000000000001'],
+			['127.1'],
+			['127.000.001'],
+			['0177.0.0.01'],
+			['0x7f.0x0.0x0.0x1'],
+			['0x7f000001'],
+			['2130706433'],
+			['00000000000000000000000000000000000000000000000000177.1'],
+			['0x7f.1'],
+			['127.0x1'],
+			['[0000:0000:0000:0000:0000:0000:0000:0001]'],
+			['[0:0:0:0:0:0:0:1]'],
+			['[0:0:0:0::0:0:1]'],
+			['%31%32%37%2E%30%2E%30%2E%31'],
+			['%31%32%37%2E%30%2E%30.%31'],
+			['[%3A%3A%31]'],
 		];
 	}
 

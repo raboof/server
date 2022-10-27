@@ -37,7 +37,12 @@ OC.L10N.register(
     "Legal notice" : "Правно известување",
     "Privacy policy" : "Политика за приватност",
     "Adjust the Nextcloud theme" : "Прилагодување на темата за Nextcloud",
+    "Keyboard shortcuts" : "Кратенки преку тастатура",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "Универзалниот пристап е многу важен за нас. Ние ги следиме веб-стандардите и ги имплементираме за да го направиме користењето попристапно, како користење без маус, и помошни апликации за читање на екранот. Наша цел е да бидеме во согласност со {guidelines} {linkend}2.1 на ниво АА, со висока контрастна тема дури и на ниво на ААА.",
+    "Pick from Files" : "Избери од датотеките",
+    "Custom color" : "Прилагодена боја",
+    "Plain background" : "Обична позадина",
+    "Insert from {productName}" : "Вметнни од {productName}",
     "Open documentation" : "Отвори ја документацијата",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "Темата овозможува можно полесно прилагодување на изгледот и чувството на вашите истанци и поддржани клиенти. Ова ќе биде видливо за сите корисници.",
     "Name" : "Име",
@@ -48,7 +53,6 @@ OC.L10N.register(
     "Color" : "Боја",
     "Logo" : "Лого",
     "Upload new logo" : "Прикачи ново лого",
-    "Login image" : "Слика на најава",
     "Upload new login background" : "Прикачи нова слика за позадина на најавната страница",
     "Remove background image" : "Избриши ја позадинската слика",
     "Advanced options" : "Напредни опции",
@@ -58,6 +62,7 @@ OC.L10N.register(
     "Upload new header logo" : "Прикачи ново лого на заглавие",
     "Favicon" : "Фавикон",
     "Upload new favicon" : "Прикачи нов Фавикон",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Инсталирај Imagemagick додаток за PHP со што ќе се овозможи поддршка за SVG сликите автоматски да генерираат Фавикон базирано на прикаченото лого и боја."
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Инсталирај Imagemagick додаток за PHP со што ќе се овозможи поддршка за SVG сликите автоматски да генерираат Фавикон базирано на прикаченото лого и боја.",
+    "Login image" : "Слика на најава"
 },
 "nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;");

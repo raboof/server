@@ -37,7 +37,13 @@ OC.L10N.register(
     "Legal notice" : "Avisu legale",
     "Privacy policy" : "Critèriu de riservadesa",
     "Adjust the Nextcloud theme" : "Modìfica su tema de Nextcloud",
+    "Keyboard shortcuts" : "Curtziadòrgios de tecladu",
+    "Background" : "Isfundu",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "S'atzessu universale est de importu mannu pro nois. Sighimus is istandard de sa rete e chircamus de fàghere chi totu si potzat impreare chene cursore puru, e cun programmas de assistèntzia comente leghidores de ischermu. S'intentu nostru est de acumprire is inditos de is {guidelines}Lìinas ghia cuntenutos de rete{linkend} 2.1 a su livellu AA, cun su tema de cuntrastu artu a su livellu AAA.",
+    "Pick from Files" : "Sèbera dae archìvios",
+    "Custom color" : "Personaliza colore",
+    "Plain background" : "Isfundu simpre",
+    "Insert from {productName}" : "Inserta dae {productName}",
     "Open documentation" : "Aberi sa documentatzione",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "Sa gestione de is temas faghet chi sa personalizatzione de sa bista de s'istàntzia tua e de is clientes suportados siat prus fàtzile. Custu at a èssere visìbile pro totu is utentes.",
     "Name" : "Nùmene",
@@ -48,7 +54,6 @@ OC.L10N.register(
     "Color" : "Colore",
     "Logo" : "Logo",
     "Upload new logo" : "Càrriga logo nou",
-    "Login image" : "Imàgine de intrada",
     "Upload new login background" : "Càrriga fundu de intrada nou",
     "Remove background image" : "Boga immàgine de fundu",
     "Advanced options" : "Sèberos avantzados",
@@ -58,6 +63,8 @@ OC.L10N.register(
     "Upload new header logo" : "Càrriga logo de intestatzione nou",
     "Favicon" : "Favicon",
     "Upload new favicon" : "Càrriga favicon noa",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Installa s'estensione Imagemagick de PHP cun suportu pro is immàgines SVG pro generare in automàticu favicon basadas subra de su logo carrigadu e su colore."
+    "User settings" : "Impostatziones utente",
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Installa s'estensione Imagemagick de PHP cun suportu pro is immàgines SVG pro generare in automàticu favicon basadas subra de su logo carrigadu e su colore.",
+    "Login image" : "Imàgine de intrada"
 },
 "nplurals=2; plural=(n != 1);");

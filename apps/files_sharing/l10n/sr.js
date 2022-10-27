@@ -35,6 +35,8 @@ OC.L10N.register(
     "Delete" : "Избриши",
     "You can upload into this folder" : "Можете да отпремате у ову фасциклу",
     "Terms of service" : "Услови коришћења",
+    "Show list view" : "Prikaži prikaz liste",
+    "Show grid view" : "Prikaži prikaz mreže",
     "No compatible server found at {remote}" : "Нема компатибилног сервера на {remote}",
     "Invalid server URL" : "Неисправна адреса сервера",
     "Failed to add the public link to your Nextcloud" : "Неуспело додавање јавне везе ка Вашем Некстклауду",
@@ -123,7 +125,6 @@ OC.L10N.register(
     "Could not lock node" : "Не могу да закључам чвор",
     "Could not lock path" : "Не могу да закључам путању",
     "Wrong or no update parameter given" : "Погрешан или ненаведен параметер",
-    "Cannot increase permissions" : "Не могу да повећам привилегије",
     "Share must at least have READ or CREATE permissions" : "Deljenje mora da ima bar dozvole ČITANJE ili KREIRANJE",
     "Share must have READ permission if UPDATE or DELETE permission is set" : "Deljenje mora da ima dozvolu za ČITANJE ako je podešena dozvola UPDATE ili DELETE",
     "\"Sending the password by Nextcloud Talk\" for sharing a file or folder failed because Nextcloud Talk is not enabled." : "„Slanje lozinke putem Nextcloud Talk-a“ za deljenje datoteke ili fascikle nije uspelo jer Nextcloud Talk nije omogućen.",
@@ -245,8 +246,6 @@ OC.L10N.register(
     "sharing is disabled" : "дељење је искључено",
     "For more info, please ask the person who sent this link." : "За више информација, питајте особу која вам је послала везу.",
     "Share note" : "Белешка дељења",
-    "Show list view" : "Prikaži prikaz liste",
-    "Show grid view" : "Prikaži prikaz mreže",
     "Upload files to %s" : "Отпремите фајлове на%s",
     "Note" : "Белешка",
     "Select or drop files" : "Одаберите или превуците фајлове",
@@ -259,6 +258,7 @@ OC.L10N.register(
     "Cannot change permissions for public share links" : "Nije moguće promeniti dozvole za javne veze za deljenje",
     "Sharing sending the password by Nextcloud Talk failed because Nextcloud Talk is not enabled" : "Дељење слањем лозинке преко Nextcloud Talk-а није успело пошто Nextcloud Talk није укључен",
     "Sorry, this link doesn’t seem to work anymore." : "Нажалост, изгледа да веза више не ради.",
-    "Toggle grid view" : "Укључи/искључи приказ мреже"
+    "Toggle grid view" : "Укључи/искључи приказ мреже",
+    "Cannot increase permissions" : "Не могу да повећам привилегије"
 },
 "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);");

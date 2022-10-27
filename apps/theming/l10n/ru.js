@@ -38,7 +38,13 @@ OC.L10N.register(
     "Legal notice" : "Официальное уведомление",
     "Privacy policy" : "Политика конфиденциальности",
     "Adjust the Nextcloud theme" : "Скорректируйте тему Nextcloud'а",
+    "Keyboard shortcuts" : "Сочетания клавиш",
+    "Background" : "Фон",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "Доступная среда очень важна для нас. При разработке мы следуем веб-стандартам, контролируя возможность пользования всем сервисом без помощи мыши и с использованием вспомогательных программ, например, выполняющих чтение с экрана. Мы стремимся к выполнению рекомендаций {guidelines}Руководства доступности Веб-Контента{linkend} 2.1 на уровне АА, а при использовании режима высокой контрастности  — даже на уровне ААА.",
+    "Pick from Files" : "Выбрать из файлов",
+    "Custom color" : "Свой цвет",
+    "Plain background" : "Обычный фон",
+    "Insert from {productName}" : "Вставить из {productName}",
     "Open documentation" : "Открыть документацию",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "Этот модуль позволяют настроить внешний вид сервера и поддерживаемых клиентов. Настройки, определённые в этом модуле, распространяются на всех пользователей.",
     "Name" : "Название",
@@ -49,7 +55,6 @@ OC.L10N.register(
     "Color" : "Цвет",
     "Logo" : "Логотип",
     "Upload new logo" : "Загрузить новый логотип",
-    "Login image" : "Изображение экрана входа в систему",
     "Upload new login background" : "Загрузить новый фон для экрана входа в систему",
     "Remove background image" : "Убрать фоновое изображение ",
     "Advanced options" : "Дополнительные параметры",
@@ -59,6 +64,8 @@ OC.L10N.register(
     "Upload new header logo" : "Загрузить логотип заголовка",
     "Favicon" : "Favicon (значок сайта)",
     "Upload new favicon" : "Загрузить значок сайта",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Для автоматической генерации favicon на основе загруженного логотипа и цвета нужно установить PHP расширение Imagemagick  с поддержкой изображений SVG "
+    "User settings" : "Параметры пользователя",
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Для автоматической генерации favicon на основе загруженного логотипа и цвета нужно установить PHP расширение Imagemagick  с поддержкой изображений SVG ",
+    "Login image" : "Изображение экрана входа в систему"
 },
 "nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);");

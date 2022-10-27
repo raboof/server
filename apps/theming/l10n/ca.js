@@ -26,6 +26,7 @@ OC.L10N.register(
     "No file uploaded" : "No s'ha carregat cap fitxer",
     "You are already using a custom theme. Theming app settings might be overwritten by that." : "Ja esteu fent servir un tema propi. La configuració de l'aplicació s'hauria d'haver modificat.",
     "Theming" : "Aparença",
+    "Appearance and accessibility" : "Aspecte i accessibilitat",
     "Dark theme" : "Tema fosc",
     "Enable dark theme" : "Habilita el tema fosc",
     "Dyslexia font" : "Tipus de lletra per a la dislèxia",
@@ -37,7 +38,12 @@ OC.L10N.register(
     "Legal notice" : "Avís legal",
     "Privacy policy" : "Política de privadesa",
     "Adjust the Nextcloud theme" : "Ajusteu el tema del Nextcloud",
+    "Keyboard shortcuts" : "Dreceres de teclat",
     "Universal access is very important to us. We follow web standards and check to make everything usable also without mouse, and assistive software such as screenreaders. We aim to be compliant with the {guidelines}Web Content Accessibility Guidelines{linkend} 2.1 on AA level, with the high contrast theme even on AAA level." : "L'accés universal és molt important per a nosaltres. Seguim els estàndards web i comprovem que tot es pugui utilitzar també sense el ratolí i amb programes d'assistència, com ara els lectors de pantalla. Volem complir les {guidelines}Pautes d'accessibilitat del contingut web{linkend} 2.1 a nivell AA i amb el tema de contrast alt fins i tot a nivell AAA.",
+    "Pick from Files" : "Trieu dels fitxers",
+    "Custom color" : "Color personalitzat",
+    "Plain background" : "Fons senzill",
+    "Insert from {productName}" : "Insereix des de {productName}",
     "Open documentation" : "Obre la documentació",
     "Theming makes it possible to easily customize the look and feel of your instance and supported clients. This will be visible for all users." : "L'aparença permet personalitzar fàcilment l'aspecte de la vostra web i dels clients. Això serà visible per a tots els usuaris.",
     "Name" : "Nom",
@@ -48,7 +54,6 @@ OC.L10N.register(
     "Color" : "Color",
     "Logo" : "Logotip",
     "Upload new logo" : "Puja un logotip nou",
-    "Login image" : "Imatge d'inici de sessió",
     "Upload new login background" : "Carrega un nou fons d'inici de sessió",
     "Remove background image" : "Suprimeix la imatge de fons",
     "Advanced options" : "Paràmetres avançats",
@@ -58,6 +63,8 @@ OC.L10N.register(
     "Upload new header logo" : "Puja un logotip de capçalera nou",
     "Favicon" : "Icona de web",
     "Upload new favicon" : "Carrega un nou favicon",
-    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Instal·leu l'extensió PHP de l'ImageMagick compatible amb imatges SVG per generar automàticament una icona de web a partir del logotip pujat i del color."
+    "User settings" : "Paràmetres de l'usuari",
+    "Install the Imagemagick PHP extension with support for SVG images to automatically generate favicons based on the uploaded logo and color." : "Instal·leu l'extensió PHP de l'ImageMagick compatible amb imatges SVG per generar automàticament una icona de web a partir del logotip pujat i del color.",
+    "Login image" : "Imatge d'inici de sessió"
 },
 "nplurals=2; plural=(n != 1);");
