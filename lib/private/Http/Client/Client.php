@@ -41,7 +41,6 @@ use OCP\Http\Client\LocalServerException;
 use OCP\ICertificateManager;
 use OCP\IConfig;
 use function parse_url;
-use function urldecode;
 
 /**
  * Class Client
@@ -188,7 +187,7 @@ class Client implements IClient {
 		if ($host === false || $host === null) {
 			throw new LocalServerException('Could not detect any host');
 		}
-		$this->localAddressChecker->throwIfLocalAddress(urldecode($host));
+		$this->localAddressChecker->throwIfLocalAddress($host);
 	}
 
 	/**
