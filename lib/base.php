@@ -665,16 +665,17 @@ class OC {
 			$errorHandler = new OC\Log\ErrorHandler(
 				\OCP\Server::get(\Psr\Log\LoggerInterface::class),
 			);
+			$exceptionHandler = [$errorHandler, 'onException'];
 			if ($config->getSystemValue('debug', false)) {
 				set_error_handler([$errorHandler, 'onAll'], E_ALL);
 				if (\OC::$CLI) {
-					set_exception_handler(['OC_Template', 'printExceptionErrorPage']);
+					$exceptionHandler = ['OC_Template', 'printExceptionErrorPage'];
 				}
 			} else {
 				set_error_handler([$errorHandler, 'onError']);
 			}
 			register_shutdown_function([$errorHandler, 'onShutdown']);
-			set_exception_handler([$errorHandler, 'onException']);
+			set_exception_handler($exceptionHandler);
 		}
 
 		/** @var \OC\AppFramework\Bootstrap\Coordinator $bootstrapCoordinator */
