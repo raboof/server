@@ -37,8 +37,11 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\RequestOptions;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IResponse;
+use OCP\Http\Client\LocalServerException;
 use OCP\ICertificateManager;
 use OCP\IConfig;
+use function parse_url;
+use function urldecode;
 
 /**
  * Class Client
@@ -181,7 +184,11 @@ class Client implements IClient {
 			return;
 		}
 
-		$this->localAddressChecker->throwIfLocalAddress($uri);
+		$host = parse_url($uri, PHP_URL_HOST);
+		if ($host === false || $host === null) {
+			throw new LocalServerException('Could not detect any host');
+		}
+		$this->localAddressChecker->throwIfLocalAddress(urldecode($host));
 	}
 
 	/**

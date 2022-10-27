@@ -16,6 +16,7 @@ use OCP\Http\Client\LocalServerException;
 use OCP\ICertificateManager;
 use OCP\IConfig;
 use PHPUnit\Framework\MockObject\MockObject;
+use function parse_url;
 
 /**
  * Class ClientTest
@@ -146,22 +147,22 @@ class ClientTest extends \Test\TestCase {
 
 	public function dataPreventLocalAddress():array {
 		return [
-			['localhost/foo.bar'],
-			['localHost/foo.bar'],
-			['random-host/foo.bar'],
-			['[::1]/bla.blub'],
-			['[::]/bla.blub'],
-			['192.168.0.1'],
-			['172.16.42.1'],
-			['[fdf8:f53b:82e4::53]/secret.ics'],
-			['[fe80::200:5aee:feaa:20a2]/secret.ics'],
-			['[0:0:0:0:0:0:10.0.0.1]/secret.ics'],
-			['[0:0:0:0:0:ffff:127.0.0.0]/secret.ics'],
-			['10.0.0.1'],
-			['another-host.local'],
-			['service.localhost'],
-			['!@#$'], // test invalid url
-			['normal.host.com'],
+			['https://localhost/foo.bar'],
+			['https://localHost/foo.bar'],
+			['https://random-host/foo.bar'],
+			['https://[::1]/bla.blub'],
+			['https://[::]/bla.blub'],
+			['https://192.168.0.1'],
+			['https://172.16.42.1'],
+			['https://[fdf8:f53b:82e4::53]/secret.ics'],
+			['https://[fe80::200:5aee:feaa:20a2]/secret.ics'],
+			['https://[0:0:0:0:0:0:10.0.0.1]/secret.ics'],
+			['https://[0:0:0:0:0:ffff:127.0.0.0]/secret.ics'],
+			['https://10.0.0.1'],
+			['https://another-host.local'],
+			['https://service.localhost'],
+			['!@#$', true], // test invalid url
+			['https://normal.host.com'],
 		];
 	}
 
@@ -175,9 +176,7 @@ class ClientTest extends \Test\TestCase {
 			->with('allow_local_remote_servers', false)
 			->willReturn(true);
 
-//		$this->expectException(LocalServerException::class);
-
-		self::invokePrivate($this->client, 'preventLocalAddress', ['http://' . $uri, []]);
+		self::invokePrivate($this->client, 'preventLocalAddress', [$uri, []]);
 	}
 
 	/**
@@ -188,9 +187,7 @@ class ClientTest extends \Test\TestCase {
 		$this->config->expects($this->never())
 			->method('getSystemValueBool');
 
-//		$this->expectException(LocalServerException::class);
-
-		self::invokePrivate($this->client, 'preventLocalAddress', ['http://' . $uri, [
+		self::invokePrivate($this->client, 'preventLocalAddress', [$uri, [
 			'nextcloud' => ['allow_local_address' => true],
 		]]);
 	}
@@ -200,14 +197,14 @@ class ClientTest extends \Test\TestCase {
 	 * @param string $uri
 	 */
 	public function testPreventLocalAddressOnGet(string $uri): void {
+		$host = parse_url($uri, PHP_URL_HOST);
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
-			->expects($this->once())
 			->method('throwIfLocalAddress')
-			->with('http://' . $uri)
+			->with($host)
 			->will($this->throwException(new LocalServerException()));
 
-		$this->client->get('http://' . $uri);
+		$this->client->get($uri);
 	}
 
 	/**
@@ -215,14 +212,14 @@ class ClientTest extends \Test\TestCase {
 	 * @param string $uri
 	 */
 	public function testPreventLocalAddressOnHead(string $uri): void {
+		$host = parse_url($uri, PHP_URL_HOST);
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
-			->expects($this->once())
 			->method('throwIfLocalAddress')
-			->with('http://' . $uri)
+			->with($host)
 			->will($this->throwException(new LocalServerException()));
 
-		$this->client->head('http://' . $uri);
+		$this->client->head($uri);
 	}
 
 	/**
@@ -230,14 +227,14 @@ class ClientTest extends \Test\TestCase {
 	 * @param string $uri
 	 */
 	public function testPreventLocalAddressOnPost(string $uri): void {
+		$host = parse_url($uri, PHP_URL_HOST);
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
-		->expects($this->once())
 		->method('throwIfLocalAddress')
-		->with('http://' . $uri)
+		->with($host)
 		->will($this->throwException(new LocalServerException()));
 
-		$this->client->post('http://' . $uri);
+		$this->client->post($uri);
 	}
 
 	/**
@@ -245,14 +242,14 @@ class ClientTest extends \Test\TestCase {
 	 * @param string $uri
 	 */
 	public function testPreventLocalAddressOnPut(string $uri): void {
+		$host = parse_url($uri, PHP_URL_HOST);
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
-			->expects($this->once())
 			->method('throwIfLocalAddress')
-			->with('http://' . $uri)
+			->with($host)
 			->will($this->throwException(new LocalServerException()));
 
-		$this->client->put('http://' . $uri);
+		$this->client->put($uri);
 	}
 
 	/**
@@ -260,14 +257,14 @@ class ClientTest extends \Test\TestCase {
 	 * @param string $uri
 	 */
 	public function testPreventLocalAddressOnDelete(string $uri): void {
+		$host = parse_url($uri, PHP_URL_HOST);
 		$this->expectException(LocalServerException::class);
 		$this->localAddressChecker
-			->expects($this->once())
 			->method('throwIfLocalAddress')
-			->with('http://' . $uri)
+			->with($host)
 			->will($this->throwException(new LocalServerException()));
 
-		$this->client->delete('http://' . $uri);
+		$this->client->delete($uri);
 	}
 
 	private function setUpDefaultRequestOptions(): void {

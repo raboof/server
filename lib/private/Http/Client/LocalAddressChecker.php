@@ -32,6 +32,10 @@ use OCP\Http\Client\LocalServerException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\IpUtils;
 
+/**
+ * @deprecated use \OCP\Security\IRemoteHostValidator
+ * @see \OCP\Security\IRemoteHostValidator
+ */
 class LocalAddressChecker {
 	private LoggerInterface $logger;
 
@@ -39,6 +43,12 @@ class LocalAddressChecker {
 		$this->logger = $logger;
 	}
 
+	/**
+	 * @param string $ip
+	 *
+	 * @throws LocalServerException
+	 * @return void
+	 */
 	public function throwIfLocalIp(string $ip) : void {
 		$parsedIp = Factory::parseAddressString(
 			$ip,
@@ -70,13 +80,13 @@ class LocalAddressChecker {
 		}
 	}
 
-	public function throwIfLocalAddress(string $uri) : void {
-		$host = parse_url($uri, PHP_URL_HOST);
-		if ($host === false || $host === null) {
-			$this->logger->warning("Could not detect any host in $uri");
-			throw new LocalServerException('Could not detect any host');
-		}
-
+	/**
+	 * @param string $host
+	 *
+	 * @throws LocalServerException
+	 * @return void
+	 */
+	public function throwIfLocalAddress(string $host) : void {
 		$host = idn_to_utf8(strtolower(urldecode($host)));
 		// Remove brackets from IPv6 addresses
 		if (strpos($host, '[') === 0 && substr($host, -1) === ']') {
