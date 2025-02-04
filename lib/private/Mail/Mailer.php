@@ -54,6 +54,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer as SymfonyMailer;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Transport\NullTransport;
 use Symfony\Component\Mailer\Transport\SendmailTransport;
 use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 use Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream;
@@ -287,6 +288,9 @@ class Mailer implements IMailer {
 		switch ($this->config->getSystemValueString('mail_smtpmode', 'smtp')) {
 			case 'sendmail':
 				$transport = $this->getSendMailInstance();
+				break;
+			case 'disabled':
+				$transport = new NullTransport();
 				break;
 			case 'smtp':
 			default:

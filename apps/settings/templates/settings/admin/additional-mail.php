@@ -35,6 +35,7 @@ $mail_smtpsecure = [
 
 $mail_smtpmode = [
 	['smtp', 'SMTP'],
+	['disabled', 'Disabled'],
 ];
 if ($_['sendmail_is_available']) {
 	$mail_smtpmode[] = ['sendmail', 'Sendmail'];
